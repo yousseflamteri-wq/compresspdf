@@ -22,15 +22,18 @@ export const metadata = {
   description: defaultDescription,
   applicationName: siteName,
   robots: { index: true, follow: true },
+  alternates: {
+    canonical: './',
+  },
   openGraph: {
     type: 'website',
     siteName,
     title: defaultTitle,
     description: defaultDescription,
-    url: siteUrl,
+    url: './',
     images: [
       {
-        url: `${siteUrl}/opengraph-image`,
+        url: '/og-image.png',
         width: 1200,
         height: 630,
         alt: defaultTitle,
@@ -41,7 +44,7 @@ export const metadata = {
     card: 'summary_large_image',
     title: defaultTitle,
     description: defaultDescription,
-    images: [`${siteUrl}/opengraph-image`],
+    images: ['/og-image.png'],
   },
 };
 

@@ -1,0 +1,16 @@
+﻿{
+  "name": "Compress PDF Online",
+  "short_name": "CompressPDF",
+  "description": "Free in-browser PDF compressor. Reduce file size without server uploads.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0f172a",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    }
+  ]
+}

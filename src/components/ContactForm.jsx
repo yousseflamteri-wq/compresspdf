@@ -1,99 +1,101 @@
-'use client';
+﻿'use client';
 
 import { useState } from 'react';
-import { CheckCircle2 } from 'lucide-react';
 
 export default function ContactForm() {
-  const [sent, setSent] = useState(false);
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [message, setMessage] = useState('');
+  const [status, setStatus] = useState('idle');
 
-  const handleSubmit = (e) => {
+  async function handleSubmit(e) {
     e.preventDefault();
-    setSent(true);
-  };
+    setStatus('submitting');
 
-  if (sent) {
-    return (
-      <div
-        role="alert"
-        className="rounded-xl border border-green-200 bg-green-50 p-6 text-center text-slate-800"
-      >
-        <CheckCircle2 className="mx-auto h-7 w-7 text-green-600 mb-2" />
-        <h2 className="text-base font-bold text-slate-900">Message Received</h2>
-        <p className="text-xs sm:text-sm text-slate-600 mt-1 max-w-md mx-auto">
-          Thanks for reaching out! We read all technical feedback, bug reports, and file format inquiries. We will reply to your email address shortly.
-        </p>
-      </div>
-    );
+    const formData = new FormData(e.target);
+    formData.append('access_key', '7da759e2-e31a-4afe-9cc0-8bb37025bcbd');
+    formData.append('subject', 'New Contact Message - Compress PDF Online');
+    formData.append('from_name', 'Compress PDF Online Contact Form');
+
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: formData,
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setStatus('success');
+        e.target.reset();
+      } else {
+        setStatus('error');
+      }
+    } catch (err) {
+      setStatus('error');
+    }
   }
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="space-y-4 rounded-xl border border-slate-200 bg-white p-5 sm:p-7 shadow-sm"
-    >
+    <form onSubmit={handleSubmit} className="space-y-6">
       <div>
-        <label
-          htmlFor="contact-name"
-          className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5"
-        >
+        <label htmlFor="name" className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
           Name
         </label>
         <input
-          id="contact-name"
           type="text"
+          name="name"
+          id="name"
           required
-          value={name}
-          onChange={(e) => setName(e.target.value)}
           placeholder="Your full name"
-          className="w-full rounded-lg border border-slate-200 px-3.5 py-2.5 text-sm focus:border-green-600 focus:outline-none focus:ring-1 focus:ring-green-600"
+          className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-sm"
         />
       </div>
 
       <div>
-        <label
-          htmlFor="contact-email"
-          className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5"
-        >
+        <label htmlFor="email" className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
           Email Address
         </label>
         <input
-          id="contact-email"
           type="email"
+          name="email"
+          id="email"
           required
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
           placeholder="you@example.com"
-          className="w-full rounded-lg border border-slate-200 px-3.5 py-2.5 text-sm focus:border-green-600 focus:outline-none focus:ring-1 focus:ring-green-600"
+          className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-sm"
         />
       </div>
 
       <div>
-        <label
-          htmlFor="contact-message"
-          className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5"
-        >
+        <label htmlFor="message" className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
           Message
         </label>
         <textarea
-          id="contact-message"
-          required
+          name="message"
+          id="message"
           rows={5}
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
+          required
           placeholder="Describe your issue or feedback (e.g. specific PDF version, browser, or compression result)..."
-          className="w-full rounded-lg border border-slate-200 px-3.5 py-2.5 text-sm focus:border-green-600 focus:outline-none focus:ring-1 focus:ring-green-600"
+          className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-sm"
         />
       </div>
 
       <button
         type="submit"
-        className="w-full min-h-[44px] rounded-lg bg-green-600 py-3 text-sm font-bold text-white transition hover:bg-green-700 shadow-sm"
+        disabled={status === 'submitting'}
+        className="w-full py-3.5 px-6 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-semibold transition-colors disabled:opacity-50"
       >
-        Send Message
+        {status === 'submitting' ? 'Sending...' : 'Send Message'}
       </button>
+
+      {status === 'success' && (
+        <p className="text-sm font-medium text-emerald-600 text-center">
+          Thank you! Your message has been sent successfully.
+        </p>
+      )}
+
+      {status === 'error' && (
+        <p className="text-sm font-medium text-rose-600 text-center">
+          Something went wrong while sending your message. Please try again.
+        </p>
+      )}
     </form>
   );
 }

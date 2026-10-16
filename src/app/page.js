@@ -1,13 +1,13 @@
 import Link from 'next/link';
 import CompressPdfTool from '../components/CompressPdfTool';
-import { siteUrl, siteName } from '../lib/siteConfig';
+import { siteUrl } from '../lib/siteConfig';
 
 export const metadata = {
   title: {
     absolute: 'Compress PDF Online Free – Reduce PDF Size to 200KB or Less',
   },
   description:
-    'Compress PDF files online directly in your browser. Reduce file size to under 200KB or 100KB for job portals, visa applications, and email limits with zero server uploads.',
+    'Compress PDF files in your browser. Get under 200KB or 100KB for job portals, visa applications, and email with no server uploads.',
   alternates: {
     canonical: siteUrl,
   },
@@ -60,23 +60,6 @@ const faqs = [
 ];
 
 export default function HomePage() {
-  const jsonLdSoftware = {
-    '@context': 'https://schema.org',
-    '@type': 'SoftwareApplication',
-    name: siteName,
-    url: siteUrl,
-    applicationCategory: 'UtilitiesApplication',
-    operatingSystem: 'All',
-    browserRequirements: 'Requires JavaScript-enabled web browser',
-    description:
-      'Free in-browser PDF compressor to reduce file sizes locally without server uploads.',
-    offers: {
-      '@type': 'Offer',
-      price: '0',
-      priceCurrency: 'USD',
-    },
-  };
-
   const jsonLdFaq = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
@@ -90,46 +73,11 @@ export default function HomePage() {
     })),
   };
 
-  const jsonLdHowTo = {
-    '@context': 'https://schema.org',
-    '@type': 'HowTo',
-    name: 'How to compress a PDF online for free',
-    totalTime: 'PT1M',
-    step: [
-      {
-        '@type': 'HowToStep',
-        position: 1,
-        name: 'Input Scan',
-        text: 'Drag and drop your high-resolution PDF into the browser compressor.',
-      },
-      {
-        '@type': 'HowToStep',
-        position: 2,
-        name: 'Canvas Rebuild',
-        text: 'Select Recommended or Extreme <200KB to optimize images while preserving text.',
-      },
-      {
-        '@type': 'HowToStep',
-        position: 3,
-        name: 'Download Output',
-        text: 'Save your compressed PDF immediately with zero watermarks.',
-      },
-    ],
-  };
-
   return (
     <main className="mx-auto max-w-5xl px-4 sm:px-6 pt-8 sm:pt-12 pb-8 text-slate-900">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdSoftware) }}
-      />
-      <script
-        type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdFaq) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdHowTo) }}
       />
 
       {/* Hero Header Matching Mockup */}

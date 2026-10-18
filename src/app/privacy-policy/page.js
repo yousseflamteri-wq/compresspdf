@@ -1,21 +1,17 @@
 import Link from 'next/link';
-import { siteName, siteUrl } from '../../lib/siteConfig';
+import { siteName, buildMetadata } from '../../lib/siteConfig';
 
-export const metadata = {
-  title: {
-    absolute: `Privacy Policy – ${siteName}`,
-  },
+export const metadata = buildMetadata({
+  title: `Privacy Policy – ${siteName}`,
   description: `Privacy policy for ${siteName}. Plain English explanation of how our local file tool works and how cookies are handled.`,
-  alternates: {
-    canonical: `${siteUrl}/privacy-policy`,
-  },
-};
+  path: '/privacy-policy',
+});
 
 export default function PrivacyPolicyPage() {
   return (
     <main className="mx-auto max-w-3xl px-4 py-10 sm:py-14 text-slate-800">
       <h1 className="text-3xl font-black text-slate-900 tracking-tight mb-3">Privacy Policy</h1>
-      <p className="text-xs text-slate-400 mb-8 tabular-nums">Last updated: October 14, 2026</p>
+      <p className="text-xs text-slate-400 mb-8 tabular-nums">Last updated: October 17, 2026</p>
 
       <div className="space-y-6 text-sm leading-relaxed text-slate-700">
         <section>
@@ -33,12 +29,12 @@ export default function PrivacyPolicyPage() {
         </section>
 
         <section>
-          <h2 className="text-base font-bold text-slate-900 mb-2">2. Google AdSense and Cookies</h2>
+          <h2 className="text-base font-bold text-slate-900 mb-2">2. Advertising and Third-Party Services</h2>
           <p>
-            To keep this website completely free to use, we display ads served by <strong>Google AdSense</strong>.
+            This website does not currently show advertising. We may add ads in the future, for example through <strong>Google AdSense</strong>. If we do, we will update this policy before the ads go live.
           </p>
           <p className="mt-2">
-            Google uses cookies (such as the DoubleClick cookie) to serve ads based on your prior visits to this site or other websites across the web. These cookies allow Google and its partners to show relevant ads without accessing your personal documents.
+            Google and its partners may use cookies (such as the DoubleClick cookie) to show ads based on your visits to this site and other websites. These cookies never give them access to your PDF files, which stay in your browser.
           </p>
           <p className="mt-2">
             You can turn off personalized advertising at any time by visiting{' '}

@@ -1,23 +1,19 @@
 import Link from 'next/link';
-import { siteName, siteUrl } from '../../lib/siteConfig';
+import { siteName, siteUrl, buildMetadata } from '../../lib/siteConfig';
 
-export const metadata = {
-  title: {
-    absolute: `PDF Optimization Guides & Tutorials – ${siteName}`,
-  },
+export const metadata = buildMetadata({
+  title: `PDF Optimization Guides & Tutorials – ${siteName}`,
   description:
     'Practical, engineering-focused guides on reducing PDF file sizes across macOS, iOS, Windows, and web browsers without paying for expensive subscriptions.',
-  alternates: {
-    canonical: `${siteUrl}/blog`,
-  },
-};
+  path: '/blog',
+});
 
 const guides = [
   {
     slug: 'how-to-compress-pdf-file-size',
     title: 'How to Compress a PDF to Under 200KB or 100KB for Upload Portals',
     desc: 'Government, job, and visa portals enforce strict file size caps. Learn how vector text versus scanned pages affect file weight, and how to reach under 200 KB safely.',
-    date: '2026-10-14',
+    date: '2026-10-17',
     readTime: '4 min read',
     topic: 'File Size Targets',
   },
@@ -25,7 +21,7 @@ const guides = [
     slug: 'how-to-compress-a-pdf-on-mac',
     title: 'How to Compress a PDF on Mac Without Preview Blurring Text',
     desc: 'Why macOS Preview’s Quartz "Reduce File Size" filter degrades typography and produces fuzzy text, and how to downscale documents cleanly in Safari or Pages.',
-    date: '2026-10-14',
+    date: '2026-10-17',
     readTime: '4 min read',
     topic: 'macOS & Safari',
   },

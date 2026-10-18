@@ -1,14 +1,10 @@
-import { siteName, siteUrl } from '../../lib/siteConfig';
+import { siteName, buildMetadata } from '../../lib/siteConfig';
 
-export const metadata = {
-  title: {
-    absolute: `Terms of Service – ${siteName}`,
-  },
-  description: `Simple terms of service for using ${siteName}.`,
-  alternates: {
-    canonical: `${siteUrl}/terms`,
-  },
-};
+export const metadata = buildMetadata({
+  title: `Terms of Service – ${siteName}`,
+  description: `Terms of service for ${siteName}, our free in-browser PDF compressor. No server uploads, no account needed. Read the usage terms.`,
+  path: '/terms',
+});
 
 export default function TermsPage() {
   return (

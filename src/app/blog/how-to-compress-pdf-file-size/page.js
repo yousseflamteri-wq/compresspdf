@@ -1,16 +1,15 @@
 import Link from 'next/link';
-import { siteName, siteUrl } from '../../../lib/siteConfig';
+import { siteName, siteUrl, buildMetadata } from '../../../lib/siteConfig';
 
-export const metadata = {
-  title: {
-    absolute: 'How to Compress a PDF to Under 200KB or 100KB for Upload Portals',
-  },
+export const metadata = buildMetadata({
+  title: 'How to Compress a PDF to Under 200KB or 100KB',
   description:
-    'Need to meet strict 200KB or 100KB upload limits for job portals and visa applications? Learn how to compress vector documents and scanned paperwork cleanly.',
-  alternates: {
-    canonical: `${siteUrl}/blog/how-to-compress-pdf-file-size`,
-  },
-};
+    'Meet strict portal limits: compress PDF to 200KB or 100KB for job applications and visa forms. Works on scanned and digital documents.',
+  path: '/blog/how-to-compress-pdf-file-size',
+  type: 'article',
+  publishedTime: '2026-10-14',
+  modifiedTime: '2026-10-17',
+});
 
 export default function CompressPdfFileSizePage() {
   const guideUrl = `${siteUrl}/blog/how-to-compress-pdf-file-size`;
@@ -23,8 +22,9 @@ export default function CompressPdfFileSizePage() {
     '@type': 'BlogPosting',
     headline: guideTitle,
     description: guideDescription,
+    image: `${siteUrl}/og-image.png`,
     datePublished: '2026-10-14',
-    dateModified: '2026-10-14',
+    dateModified: '2026-10-17',
     author: {
       '@type': 'Organization',
       name: siteName,
@@ -102,7 +102,7 @@ export default function CompressPdfFileSizePage() {
           How to Compress a PDF to Under 200KB or 100KB for Upload Portals
         </h1>
         <div className="mt-3 flex items-center gap-3 text-xs text-slate-400">
-          <time dateTime="2026-10-14" className="tabular-nums">Updated October 14, 2026</time>
+          <time dateTime="2026-10-17" className="tabular-nums">Updated October 17, 2026</time>
           <span aria-hidden="true">•</span>
           <span>4 min read</span>
           <span aria-hidden="true">•</span>
@@ -167,7 +167,7 @@ export default function CompressPdfFileSizePage() {
             <strong>Use the Extreme Preset:</strong> On <Link href="/" className="text-green-700 font-semibold underline">compresspdf.online</Link>, select <strong>Extreme</strong>. Our engine runs an iterative resampling algorithm that steps down image dimensions (from 2800px down to 1100px, 850px, and 650px) until the compressed output hits under 200 KB or image quality drops below readable thresholds.
           </li>
           <li>
-            <strong>Enable Maximum Compression Fallback:</strong> Check the box labeled <em>&quot;Allow maximum compression if needed&quot;</em>. If stubborn embedded font subsets or non-standard color profiles prevent the vector engine from reaching 200 KB, the engine switches to a raster fallback pass, rebuilding pages as web-optimized images.
+            <strong>Let the Automatic Fallback Run:</strong> No extra setting is needed. If stubborn embedded fonts or non-standard color profiles keep the vector pass above 200 KB, Extreme mode automatically switches to a fallback pass that rebuilds each page as a web-optimized image. Because the pages become images, text is no longer vector-sharp when you zoom in, so try <strong>Recommended</strong> first if your portal limit allows it.
           </li>
           <li>
             <strong>Delete Unnecessary Blank Pages:</strong> Scanners often append blank pages or terms pages to the end of a document. Even a blank scanned page with background paper grain can add 400 KB. Remove it before compressing.

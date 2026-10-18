@@ -1,15 +1,11 @@
 import Link from 'next/link';
-import { siteName, siteUrl, mainSiteName, mainSiteUrl } from '../../lib/siteConfig';
+import { siteName, mainSiteName, mainSiteUrl, buildMetadata } from '../../lib/siteConfig';
 
-export const metadata = {
-  title: {
-    absolute: `About Us – ${siteName}`,
-  },
+export const metadata = buildMetadata({
+  title: `About Us – ${siteName}`,
   description: `Why we built ${siteName}: a fast, client-side in-browser PDF compressor that runs completely on your own device hardware.`,
-  alternates: {
-    canonical: `${siteUrl}/about`,
-  },
-};
+  path: '/about',
+});
 
 export default function AboutPage() {
   return (

@@ -1,16 +1,15 @@
 import Link from 'next/link';
-import { siteName, siteUrl, mainSiteUrl, mainSiteName } from '../../../lib/siteConfig';
+import { siteName, siteUrl, mainSiteUrl, mainSiteName, buildMetadata } from '../../../lib/siteConfig';
 
-export const metadata = {
-  title: {
-    absolute: 'How to Compress a PDF Without Adobe Acrobat Pro (Free Alternatives)',
-  },
+export const metadata = buildMetadata({
+  title: 'How to Compress a PDF Without Adobe Acrobat (Free)',
   description:
     'Stop paying $20/month for Adobe Acrobat Pro subscriptions. Compare Adobe cloud sign-in walls against free, zero-upload in-browser PDF compression.',
-  alternates: {
-    canonical: `${siteUrl}/blog/compress-pdf-without-adobe-acrobat`,
-  },
-};
+  path: '/blog/compress-pdf-without-adobe-acrobat',
+  type: 'article',
+  publishedTime: '2026-10-14',
+  modifiedTime: '2026-10-14',
+});
 
 export default function CompressWithoutAdobePage() {
   const guideUrl = `${siteUrl}/blog/compress-pdf-without-adobe-acrobat`;
@@ -23,6 +22,7 @@ export default function CompressWithoutAdobePage() {
     '@type': 'BlogPosting',
     headline: guideTitle,
     description: guideDescription,
+    image: `${siteUrl}/og-image.png`,
     datePublished: '2026-10-14',
     dateModified: '2026-10-14',
     author: {

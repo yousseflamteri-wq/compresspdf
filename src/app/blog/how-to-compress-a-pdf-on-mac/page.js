@@ -1,16 +1,15 @@
 import Link from 'next/link';
-import { siteName, siteUrl } from '../../../lib/siteConfig';
+import { siteName, siteUrl, buildMetadata } from '../../../lib/siteConfig';
 
-export const metadata = {
-  title: {
-    absolute: 'How to Compress a PDF on Mac Without Preview Blurring Text',
-  },
+export const metadata = buildMetadata({
+  title: 'How to Compress a PDF on Mac Without Preview Blurring Text',
   description:
-    'Learn how to compress PDF documents on macOS without losing typography clarity. Understand why Apple Preview Quartz filter degrades text and how to optimize cleanly for free.',
-  alternates: {
-    canonical: `${siteUrl}/blog/how-to-compress-a-pdf-on-mac`,
-  },
-};
+    "Compress a PDF on Mac without blurry text. Learn why Preview's Quartz filter hurts fonts and how to shrink files cleanly in Safari or Pages.",
+  path: '/blog/how-to-compress-a-pdf-on-mac',
+  type: 'article',
+  publishedTime: '2026-10-14',
+  modifiedTime: '2026-10-17',
+});
 
 export default function CompressPdfOnMacPage() {
   const guideUrl = `${siteUrl}/blog/how-to-compress-a-pdf-on-mac`;
@@ -23,8 +22,9 @@ export default function CompressPdfOnMacPage() {
     '@type': 'BlogPosting',
     headline: guideTitle,
     description: guideDescription,
+    image: `${siteUrl}/og-image.png`,
     datePublished: '2026-10-14',
-    dateModified: '2026-10-14',
+    dateModified: '2026-10-17',
     author: {
       '@type': 'Organization',
       name: siteName,
@@ -102,7 +102,7 @@ export default function CompressPdfOnMacPage() {
           How to Compress a PDF on Mac Without Preview Blurring Text
         </h1>
         <div className="mt-3 flex items-center gap-3 text-xs text-slate-400">
-          <time dateTime="2026-10-14" className="tabular-nums">Updated October 14, 2026</time>
+          <time dateTime="2026-10-17" className="tabular-nums">Updated October 17, 2026</time>
           <span aria-hidden="true">•</span>
           <span>4 min read</span>
           <span aria-hidden="true">•</span>
@@ -227,7 +227,7 @@ export default function CompressPdfOnMacPage() {
                 </tr>
                 <tr>
                   <td className="py-2.5 font-medium text-slate-800">In-Browser Engine</td>
-                  <td className="py-2.5 text-green-700 font-semibold">100% Vector Crisp</td>
+                  <td className="py-2.5 text-green-700 font-semibold">Vector crisp (Recommended mode)</td>
                   <td className="py-2.5 tabular-nums">50% – 85%</td>
                   <td className="py-2.5">Instant, zero-install</td>
                 </tr>

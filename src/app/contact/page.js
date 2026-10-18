@@ -1,15 +1,11 @@
 import ContactForm from '../../components/ContactForm';
-import { siteName, siteUrl } from '../../lib/siteConfig';
+import { siteName, buildMetadata } from '../../lib/siteConfig';
 
-export const metadata = {
-  title: {
-    absolute: `Contact Us – ${siteName}`,
-  },
+export const metadata = buildMetadata({
+  title: `Contact Us – ${siteName}`,
   description: `Contact the team behind ${siteName}. Reach out for technical support, error reports on specific PDF files, or business inquiries.`,
-  alternates: {
-    canonical: `${siteUrl}/contact`,
-  },
-};
+  path: '/contact',
+});
 
 export default function ContactPage() {
   return (

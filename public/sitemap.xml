@@ -2,43 +2,42 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://compresspdf.online/</loc>
-    <changefreq>daily</changefreq>
-    <priority>1.0</priority>
+    <lastmod>2026-10-16</lastmod>
   </url>
   <url>
     <loc>https://compresspdf.online/about</loc>
-    <priority>0.8</priority>
+    <lastmod>2026-10-14</lastmod>
   </url>
   <url>
     <loc>https://compresspdf.online/contact</loc>
-    <priority>0.7</priority>
+    <lastmod>2026-10-14</lastmod>
   </url>
   <url>
     <loc>https://compresspdf.online/privacy-policy</loc>
-    <priority>0.5</priority>
+    <lastmod>2026-10-17</lastmod>
   </url>
   <url>
     <loc>https://compresspdf.online/terms</loc>
-    <priority>0.5</priority>
+    <lastmod>2026-10-14</lastmod>
   </url>
   <url>
     <loc>https://compresspdf.online/blog</loc>
-    <priority>0.8</priority>
+    <lastmod>2026-10-17</lastmod>
   </url>
   <url>
     <loc>https://compresspdf.online/blog/how-to-compress-pdf-file-size</loc>
-    <priority>0.8</priority>
+    <lastmod>2026-10-17</lastmod>
   </url>
   <url>
     <loc>https://compresspdf.online/blog/how-to-compress-a-pdf-on-mac</loc>
-    <priority>0.8</priority>
+    <lastmod>2026-10-17</lastmod>
   </url>
   <url>
     <loc>https://compresspdf.online/blog/how-to-compress-pdf-on-iphone</loc>
-    <priority>0.8</priority>
+    <lastmod>2026-10-14</lastmod>
   </url>
   <url>
     <loc>https://compresspdf.online/blog/compress-pdf-without-adobe-acrobat</loc>
-    <priority>0.8</priority>
+    <lastmod>2026-10-14</lastmod>
   </url>
 </urlset>

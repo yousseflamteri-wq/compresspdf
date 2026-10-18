@@ -1,16 +1,15 @@
 import Link from 'next/link';
-import { siteName, siteUrl } from '../../../lib/siteConfig';
+import { siteName, siteUrl, buildMetadata } from '../../../lib/siteConfig';
 
-export const metadata = {
-  title: {
-    absolute: 'How to Shrink a PDF on iPhone and iPad Free (No App Store Subscriptions)',
-  },
+export const metadata = buildMetadata({
+  title: 'How to Compress a PDF on iPhone and iPad for Free',
   description:
-    'Reduce PDF file size on iOS without paying for weekly App Store subscriptions. Learn how to use mobile Safari local processing and native Files app Quick Actions.',
-  alternates: {
-    canonical: `${siteUrl}/blog/how-to-compress-pdf-on-iphone`,
-  },
-};
+    'Compress a PDF on iPhone or iPad for free, with no App Store subscription. Use mobile Safari or the Files app to shrink PDFs in seconds.',
+  path: '/blog/how-to-compress-pdf-on-iphone',
+  type: 'article',
+  publishedTime: '2026-10-14',
+  modifiedTime: '2026-10-14',
+});
 
 export default function CompressPdfOnIPhonePage() {
   const guideUrl = `${siteUrl}/blog/how-to-compress-pdf-on-iphone`;
@@ -23,6 +22,7 @@ export default function CompressPdfOnIPhonePage() {
     '@type': 'BlogPosting',
     headline: guideTitle,
     description: guideDescription,
+    image: `${siteUrl}/og-image.png`,
     datePublished: '2026-10-14',
     dateModified: '2026-10-14',
     author: {

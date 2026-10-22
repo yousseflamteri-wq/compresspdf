@@ -73,11 +73,31 @@ export default function HomePage() {
     })),
   };
 
+  const jsonLdApp = {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: 'Compress PDF Online',
+    url: siteUrl,
+    applicationCategory: 'UtilitiesApplication',
+    operatingSystem: 'Any',
+    offers: {
+      '@type': 'Offer',
+      price: '0',
+      priceCurrency: 'USD',
+    },
+    featureList:
+      'Compress PDF to under 200KB, preserve vector text, process files locally in browser',
+  };
+
   return (
     <main className="mx-auto max-w-5xl px-4 sm:px-6 pt-8 sm:pt-12 pb-8 text-slate-900">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdFaq) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdApp) }}
       />
 
       {/* Hero Header Matching Mockup */}
@@ -118,6 +138,7 @@ export default function HomePage() {
                   <span className="text-[11px] font-medium text-slate-500 block">
                     Original
                   </span>
+                  <span className="text-[9px] text-slate-400 block">Example: scanned phone PDF</span>
                   <div className="text-xl sm:text-2xl font-extrabold text-slate-950 tabular-nums mt-0.5">
                     14.2 <span className="text-xs font-bold">MB</span>
                   </div>
@@ -203,13 +224,13 @@ export default function HomePage() {
               {/* Floating Pill: 100% Vector */}
               <div className="absolute top-4 left-4 z-20 inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-2.5 py-1 text-[10px] font-bold text-slate-800 shadow-2xs">
                 <span className="h-2 w-2 rounded-full border-2 border-slate-800" />
-                <span>100% Vector</span>
+                <span>100% Vector (Low &amp; Recommended)</span>
               </div>
 
               {/* Floating Pill: 150 DPI */}
               <div className="absolute bottom-4 right-4 z-20 inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-2.5 py-1 text-[10px] font-bold text-slate-800 shadow-2xs">
                 <span className="h-2 w-2 border border-dashed border-slate-600" />
-                <span>150 DPI</span>
+                <span>150 DPI target</span>
               </div>
             </div>
 

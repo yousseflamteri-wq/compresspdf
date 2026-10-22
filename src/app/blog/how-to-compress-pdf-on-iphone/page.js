@@ -66,6 +66,31 @@ export default function CompressPdfOnIPhonePage() {
     ],
   };
 
+  const howToJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: 'How to Compress a PDF on iPhone and iPad for Free',
+    description: guideDescription,
+    image: `${siteUrl}/og-image.png`,
+    step: [
+      {
+        '@type': 'HowToStep',
+        name: 'Method 1: Local In-Browser Processing in Mobile Safari (Recommended)',
+        text: 'Open Safari and visit compresspdf.online, tap the upload area and choose a file from On My iPhone or iCloud Drive, select the Recommended preset (or Extreme for a strict portal cap like 200 KB), tap Compress PDF, wait 2-4 seconds for local processing, then tap Download Compressed PDF.',
+      },
+      {
+        '@type': 'HowToStep',
+        name: 'Method 2: Native iOS Files App Quick Actions',
+        text: 'Open the Files app, navigate to the folder containing your PDF, long-press the PDF thumbnail, tap Quick Actions, then tap Optimize File Size. iOS generates a second, downscaled version of the PDF alongside the original.',
+      },
+      {
+        '@type': 'HowToStep',
+        name: 'How to Check Exact PDF File Size on iOS',
+        text: 'In the Files app, long-press the compressed document, tap Get Info, and look at the Size field near the top. If the file is still above the required limit, re-run it through compresspdf.online with the Extreme preset.',
+      },
+    ],
+  };
+
   return (
     <article className="mx-auto max-w-3xl px-4 py-10 sm:py-14 text-slate-800">
       <script
@@ -75,6 +100,10 @@ export default function CompressPdfOnIPhonePage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(howToJsonLd) }}
       />
 
       <nav aria-label="Breadcrumb" className="mb-6 text-xs text-slate-500">

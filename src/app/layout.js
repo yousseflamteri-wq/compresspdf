@@ -62,6 +62,10 @@ export default function RootLayout({ children }) {
       <head>
         <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com" />
+        <link rel="manifest" href="/manifest.json" />
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+        <link rel="icon" href="/favicon.png" sizes="32x32" type="image/png" />
+        <link rel="apple-touch-icon" href="/icon-192.png" />
       </head>
       <body className={`${inter.className} flex min-h-screen flex-col overflow-x-hidden bg-white text-slate-900 antialiased selection:bg-emerald-100 selection:text-emerald-900`}>
         <script

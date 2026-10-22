@@ -66,6 +66,31 @@ export default function CompressPdfOnMacPage() {
     ],
   };
 
+  const howToJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: 'How to Compress a PDF on Mac Without Preview Blurring Text',
+    description: guideDescription,
+    image: `${siteUrl}/og-image.png`,
+    step: [
+      {
+        '@type': 'HowToStep',
+        name: 'Method 1: Modern Client-Side In-Browser Compression (Recommended)',
+        text: 'Visit compresspdf.online in Safari, drop your document, choose the Recommended preset, and click Compress. The document is processed locally on your Mac without transferring data across the network.',
+      },
+      {
+        '@type': 'HowToStep',
+        name: 'Method 2: Export Cleanly from Pages or Keynote',
+        text: 'Open your document in Pages, go to File > Export To > PDF, and set Image Quality to Good instead of Best. The Good setting applies standard JPEG encoding to photos while leaving text vectors pristine.',
+      },
+      {
+        '@type': 'HowToStep',
+        name: 'Method 3: Creating a Custom Quartz Filter via ColorSync Utility',
+        text: 'Open ColorSync Utility, click the Filters tab, create a new filter, add an Image Sampling component, and set Resolution to 150 DPI and Quality to Mid or High.',
+      },
+    ],
+  };
+
   return (
     <article className="mx-auto max-w-3xl px-4 py-10 sm:py-14 text-slate-800">
       <script
@@ -75,6 +100,10 @@ export default function CompressPdfOnMacPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(howToJsonLd) }}
       />
 
       <nav aria-label="Breadcrumb" className="mb-6 text-xs text-slate-500">

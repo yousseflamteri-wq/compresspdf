@@ -66,6 +66,31 @@ export default function CompressPdfFileSizePage() {
     ],
   };
 
+  const howToJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: 'How to Compress a PDF to Under 200KB or 100KB',
+    description: guideDescription,
+    image: `${siteUrl}/og-image.png`,
+    step: [
+      {
+        '@type': 'HowToStep',
+        name: 'Use the Extreme Preset',
+        text: 'On compresspdf.online, select Extreme. The engine iteratively steps down image dimensions until the compressed output hits under 200 KB or image quality drops below readable thresholds.',
+      },
+      {
+        '@type': 'HowToStep',
+        name: 'Let the Automatic Fallback Run',
+        text: 'No extra setting is needed. If the vector pass cannot reach 200 KB, Extreme mode automatically switches to a fallback pass that rebuilds each page as a web-optimized image.',
+      },
+      {
+        '@type': 'HowToStep',
+        name: 'Delete Unnecessary Blank Pages',
+        text: 'Remove blank scanned pages before compressing. Even a blank scanned page with background paper grain can add 400 KB.',
+      },
+    ],
+  };
+
   return (
     <article className="mx-auto max-w-3xl px-4 py-10 sm:py-14 text-slate-800">
       <script
@@ -75,6 +100,10 @@ export default function CompressPdfFileSizePage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(howToJsonLd) }}
       />
 
       <nav aria-label="Breadcrumb" className="mb-6 text-xs text-slate-500">

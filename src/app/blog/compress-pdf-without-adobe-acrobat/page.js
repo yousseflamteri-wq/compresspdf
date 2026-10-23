@@ -66,6 +66,41 @@ export default function CompressWithoutAdobePage() {
     ],
   };
 
+  const howToJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: 'How to Compress a PDF Without Adobe Acrobat (Free)',
+    description: guideDescription,
+    image: `${siteUrl}/og-image.png`,
+    step: [
+      {
+        '@type': 'HowToStep',
+        name: 'Open compresspdf.online in your browser',
+        text: 'Open your web browser (Chrome, Safari, Firefox, or Edge) and navigate to compresspdf.online.',
+      },
+      {
+        '@type': 'HowToStep',
+        name: 'Upload your PDF',
+        text: 'Drag your PDF file into the upload zone or tap to select it from your device storage.',
+      },
+      {
+        '@type': 'HowToStep',
+        name: 'Choose Recommended or Extreme',
+        text: 'Choose Recommended for standard digital documents, or Extreme if you have a strict portal cutoff like 200 KB or 100 KB.',
+      },
+      {
+        '@type': 'HowToStep',
+        name: 'Click Compress PDF',
+        text: 'Click Compress PDF. The tool processes the document locally in seconds.',
+      },
+      {
+        '@type': 'HowToStep',
+        name: 'Download the compressed PDF',
+        text: 'Review the original versus compressed byte savings and click Download Compressed PDF.',
+      },
+    ],
+  };
+
   return (
     <article className="mx-auto max-w-3xl px-4 py-10 sm:py-14 text-slate-800">
       <script
@@ -75,6 +110,10 @@ export default function CompressWithoutAdobePage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(howToJsonLd) }}
       />
 
       <nav aria-label="Breadcrumb" className="mb-6 text-xs text-slate-500">
@@ -201,14 +240,14 @@ export default function CompressWithoutAdobePage() {
               <tr>
                 <td className="py-2.5 font-medium text-slate-800">Account Required</td>
                 <td className="py-2.5">Yes (Adobe ID)</td>
-                <td className="py-2.5 text-amber-700">Required for downloads</td>
+                <td className="py-2.5">Required for downloads</td>
                 <td className="py-2.5 font-bold text-green-700">No account required</td>
               </tr>
               <tr>
                 <td className="py-2.5 font-medium text-slate-800">Vector Text Sharpness</td>
                 <td className="py-2.5 text-green-700 font-semibold">Preserved</td>
                 <td className="py-2.5 text-green-700 font-semibold">Preserved</td>
-                <td className="py-2.5 text-green-700 font-semibold">Preserved (Recommended)</td>
+                <td className="py-2.5 font-bold text-green-700">Preserved (Recommended)</td>
               </tr>
               <tr>
                 <td className="py-2.5 font-medium text-slate-800">Extreme Target Limits (&lt;200KB)</td>

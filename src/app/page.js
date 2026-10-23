@@ -323,6 +323,145 @@ export default function HomePage() {
       </section>
 
       {/* =====================================================================
+          HOMEPAGE SEO SECTION: How it works, presets, and size guide
+          (Placed below the tool and bento cards so the tool stays first)
+      ===================================================================== */}
+      <section className="mt-16 sm:mt-20 max-w-4xl mx-auto border-t border-slate-200/80 pt-12">
+        <h2 className="text-lg sm:text-xl font-bold text-slate-950 tracking-tight mb-5">
+          How to Compress a PDF Online, Free
+        </h2>
+        <div className="space-y-5 text-sm sm:text-base leading-relaxed text-slate-600">
+          <p>
+            Compressing a PDF online should be simple: upload the file, choose how much
+            smaller it needs to be, and download a version that still reads clearly.
+            This tool does exactly that, entirely in your browser. Your PDF is never
+            uploaded to a server, there is no account to create, and there is no
+            watermark on the result. That matters most for private documents such as
+            resumes, bank statements, ID scans, and contracts, where uploading the
+            original to a stranger&apos;s server is a risk you do not need to take.
+          </p>
+          <p>
+            Most PDFs are large for one of two reasons. Digital documents exported from
+            Word, Google Docs, or Canva contain vector text, which is already light,
+            plus embedded photos that can be heavy. Scanned documents are different:
+            they are photographs of paper, often several megabytes per page, wrapped
+            inside a PDF. That is why a text-only resume may barely shrink, while a
+            phone scan of the same resume can drop by 80% or more. If a file cannot be
+            made smaller without ruining it, this tool keeps your original intact
+            rather than degrading it.
+          </p>
+
+          <h3 className="text-base sm:text-lg font-bold text-slate-950 pt-2">
+            Compress a PDF in 3 steps
+          </h3>
+          <ol className="list-decimal pl-5 space-y-2 text-sm sm:text-base text-slate-600">
+            <li>
+              Drag and drop your PDF into the tool above, or click to browse for it
+              on your computer or phone.
+            </li>
+            <li>
+              Choose a preset: Low, Recommended, or Extreme. See below for which one
+              fits your file.
+            </li>
+            <li>
+              Compare the original and compressed sizes, then download the smaller
+              file. No sign-up is required.
+            </li>
+          </ol>
+
+          <h3 className="text-base sm:text-lg font-bold text-slate-950 pt-2">
+            Low vs. Recommended vs. Extreme: which preset should you use?
+          </h3>
+          <p>
+            <strong className="text-slate-900">Low Compression</strong> is built for
+            print quality. It lightly recompresses embedded images while keeping
+            text fonts and vector lines untouched, so letters stay sharp at any zoom
+            level. Use Low when quality matters more than size, for example for a
+            portfolio or a document you plan to print.
+          </p>
+          <p>
+            <strong className="text-slate-900">Recommended</strong> is the best
+            choice for email and sharing. It reduces photos to normal screen
+            resolution while preserving vector text, which is usually enough to get
+            a large scan under common email attachment limits without making it
+            look fuzzy. Start here unless you have a strict size cap.
+          </p>
+          <p>
+            <strong className="text-slate-900">Extreme, under 200 KB</strong>, is
+            for strict upload portals. It iteratively steps image sizes down until
+            the output tries to hit under 200 KB, and it can rebuild pages as
+            images as a fallback when vector compression alone cannot reach the
+            target. Text may no longer be selectable in that fallback case, so try
+            Recommended first if your portal limit allows it. Learn more in our
+            guide on{' '}
+            <Link href="/blog/how-to-compress-pdf-file-size" className="font-semibold text-emerald-700 hover:underline">
+              how to compress a PDF to under 200KB or 100KB
+            </Link>
+            .
+          </p>
+
+          <h3 className="text-base sm:text-lg font-bold text-slate-950 pt-2">
+            What size should you compress your PDF to?
+          </h3>
+          <ul className="list-disc pl-5 space-y-2 text-sm sm:text-base text-slate-600">
+            <li>
+              <strong className="text-slate-900">Under 100 KB or 200 KB:</strong>{' '}
+              job portals, visa applications, passport offices, and university
+              forms. These are the strictest caps, and they are also the most
+              common reason a submission is rejected for being just a few
+              kilobytes over the limit.
+            </li>
+            <li>
+              <strong className="text-slate-900">Under 1 MB to 2 MB:</strong>{' '}
+              email attachments and messaging apps, where a scanned contract or
+              statement needs to send reliably without splitting it into parts.
+            </li>
+            <li>
+              <strong className="text-slate-900">Under 5 MB to 10 MB:</strong>{' '}
+              cloud storage and general sharing, where you want a noticeably
+              smaller file without worrying about a hard portal cap.
+            </li>
+          </ul>
+          <p>
+            If you are unsure which cap applies, check the upload form itself: it
+            usually states the limit in KB or MB before you submit. Aim slightly
+            below that number, not exactly at it, so a small difference in how
+            sizes are counted does not push you over.
+          </p>
+
+          <h3 className="text-base sm:text-lg font-bold text-slate-950 pt-2">
+            Compress a PDF on Mac, iPhone, or without Adobe Acrobat
+          </h3>
+          <p>
+            The same tool works in Safari and Chrome on desktop and mobile, with
+            no app to install. On Mac, it avoids the blurry text that Apple
+            Preview&apos;s built-in Reduce File Size filter can cause — see our
+            guide on{' '}
+            <Link href="/blog/how-to-compress-a-pdf-on-mac" className="font-semibold text-emerald-700 hover:underline">
+              how to compress a PDF on Mac without Preview blurring text
+            </Link>
+            . On iPhone and iPad, you can compress in mobile Safari without a
+            paid App Store subscription, as explained in our guide on{' '}
+            <Link href="/blog/how-to-compress-pdf-on-iphone" className="font-semibold text-emerald-700 hover:underline">
+              how to shrink a PDF on iPhone and iPad for free
+            </Link>
+            . And if you do not want to pay for Adobe Acrobat Pro just to shrink
+            a file, see{' '}
+            <Link href="/blog/compress-pdf-without-adobe-acrobat" className="font-semibold text-emerald-700 hover:underline">
+              how to compress a PDF without Adobe Acrobat
+            </Link>
+            .
+          </p>
+          <p>
+            In short: use Low for print, Recommended for email and sharing, and
+            Extreme when a portal demands under 200 KB. Your file stays on your
+            device the whole time, and you only download the version you are
+            happy with.
+          </p>
+        </div>
+      </section>
+
+      {/* =====================================================================
           GUIDES & FAQ SECTIONS (Preserves Internal Links & SEO Equity)
       ===================================================================== */}
       <section className="mt-16 sm:mt-20 max-w-4xl mx-auto border-t border-slate-200/80 pt-12">

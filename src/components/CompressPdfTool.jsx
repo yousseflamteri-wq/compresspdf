@@ -24,7 +24,7 @@ const PRESETS = {
     id: 'low',
     label: 'Low Compression',
     shortLabel: 'Low',
-    subLabel: 'High quality for print',
+    subLabel: 'Print quality first',
     levels: [
       { maxDim: 2400, quality: 0.88 },
       { maxDim: 2000, quality: 0.82 },
@@ -63,7 +63,7 @@ const PRESETS = {
     id: 'extreme',
     label: 'Extreme',
     shortLabel: 'Extreme <200KB',
-    subLabel: 'Under 200 KB for portals',
+    subLabel: 'Portal limit: under 200KB',
     levels: [
       { maxDim: 1100, quality: 0.55 },
       { maxDim: 850, quality: 0.42 },
@@ -723,6 +723,16 @@ export async function compressPdf(
   };
 }
 
+function plainStage(label) {
+  if (!label) return '';
+  if (label.includes('Optimizing images')) return 'Shrinking photos in your PDF…';
+  if (label.includes('Compressing page')) return 'Compressing pages…';
+  if (label.includes('Cleaning up')) return 'Cleaning up unused data…';
+  if (label.includes('Saving document')) return 'Saving your compressed PDF…';
+  if (label.includes('Reading')) return 'Reading your PDF…';
+  return label;
+}
+
 export default function CompressPdfTool() {
   const [file, setFile] = useState(null);
   const [preset, setPreset] = useState('recommended');
@@ -778,7 +788,7 @@ export default function CompressPdfTool() {
     clearResult();
     setIsCompressing(true);
     setProgress(2);
-    setStage('Reading PDF...');
+    setStage('Reading your PDF…');
 
     try {
       const res = await compressPdf(
@@ -787,7 +797,7 @@ export default function CompressPdfTool() {
         true,
         (fraction, label) => {
           setProgress(Math.round(Math.max(2, Math.min(99, fraction * 100))));
-          setStage(label);
+          setStage(plainStage(label));
         }
       );
 
@@ -958,11 +968,14 @@ export default function CompressPdfTool() {
               </div>
             </div>
 
-            {/* Connected 3-Segment Preset Bar Below Dropzone */}
+            {/* Preset picker: one clear choice, stacked on mobile */}
+            <p className="mx-auto mt-7 max-w-xl text-center text-xs font-semibold text-slate-800">
+              What do you need it for? You can change this later.
+            </p>
             <div
               role="radiogroup"
               aria-label="Compression level"
-              className="mx-auto mt-7 max-w-xl grid grid-cols-3 rounded-xl border border-slate-200 bg-white shadow-2xs overflow-hidden divide-x divide-slate-200"
+              className="mx-auto mt-3 max-w-xl grid grid-cols-1 sm:grid-cols-3 rounded-xl border border-slate-200 bg-white shadow-2xs overflow-hidden divide-y sm:divide-x divide-slate-200"
             >
               {Object.entries(PRESETS).map(([key, opt]) => {
                 const isActive = preset === key;
@@ -1140,11 +1153,20 @@ export default function CompressPdfTool() {
                         Saved
                       </span>
                       <span className="inline-block rounded-lg bg-emerald-50 border border-emerald-200/90 px-2.5 py-1 text-xs sm:text-sm font-bold text-emerald-700 tabular-nums">
-                        {result.unchanged ? 'Optimized' : `-${savedPercent}% saved`}
+                        {result.unchanged ? 'No further saving' : `-${savedPercent}% saved`}
                       </span>
                     </div>
                   </div>
                 </div>
+
+                {result.targetMissed && (
+                  <div className="flex items-start gap-2 text-xs text-amber-900 bg-amber-50 border border-amber-200/80 p-3 rounded-xl">
+                    <AlertTriangle className="h-4 w-4 text-amber-600 shrink-0 mt-0.5" />
+                    <p className="leading-relaxed">
+                      Still over 200KB. Remove blank or duplicate pages, upload only the pages the portal asked for, or rescan in grayscale — then compress again.
+                    </p>
+                  </div>
+                )}
 
                 {result.mode === 'raster' && (
                   <div className="flex items-start gap-2 text-xs text-amber-900 bg-amber-50 border border-amber-200/80 p-3 rounded-xl">
@@ -1155,6 +1177,13 @@ export default function CompressPdfTool() {
                   </div>
                 )}
               </div>
+            )}
+
+            {/* Next step: make the preset switch obvious instead of hidden */}
+            {result && !result.unchanged && preset !== 'extreme' && (
+              <p className="text-center text-xs text-slate-500">
+                Need it smaller? Try Extreme. Want sharper text? Try Low.
+              </p>
             )}
 
             {/* Primary Action Buttons (Matches Screenshot) */}

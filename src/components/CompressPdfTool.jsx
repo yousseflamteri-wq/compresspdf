@@ -26,18 +26,12 @@ const PRESETS = {
     shortLabel: 'Low',
     subLabel: 'Print quality first',
     levels: [
-      { maxDim: 2400, quality: 0.88 },
-      { maxDim: 2000, quality: 0.82 },
+      { maxDim: 2200, quality: 0.85 },
+      { maxDim: 1800, quality: 0.78 },
     ],
     recompressFlate: true,
-    minGain: 0.97,
-    raster: {
-      minSaved: 0.15,
-      levels: [
-        { scale: 1.6, quality: 0.84 },
-        { scale: 1.4, quality: 0.78 },
-      ],
-    },
+    minGain: 0.98,
+    // No raster fallback on Low — always keeps 100% selectable vector text
   },
   recommended: {
     id: 'recommended',
@@ -46,13 +40,13 @@ const PRESETS = {
     subLabel: 'Best for email & sharing',
     featured: true,
     levels: [
-      { maxDim: 1600, quality: 0.72 },
-      { maxDim: 1300, quality: 0.65 },
+      { maxDim: 1500, quality: 0.7 },
+      { maxDim: 1200, quality: 0.62 },
     ],
     recompressFlate: true,
-    minGain: 0.94,
+    minGain: 0.96,
     raster: {
-      minSaved: 0.3,
+      minSaved: 0.05, // Only rasterize if vector pass saved less than 5%
       levels: [
         { scale: 1.4, quality: 0.62 },
         { scale: 1.2, quality: 0.52 },
@@ -164,10 +158,19 @@ function getMemoryLimits() {
 }
 
 async function inflate(bytes) {
-  const stream = new Blob([bytes])
-    .stream()
-    .pipeThrough(new DecompressionStream('deflate'));
-  return new Uint8Array(await new Response(stream).arrayBuffer());
+  try {
+    const stream = new Blob([bytes])
+      .stream()
+      .pipeThrough(new DecompressionStream('deflate'));
+    return new Uint8Array(await new Response(stream).arrayBuffer());
+  } catch {
+    if (bytes.length <= 2) throw new Error('short deflate stream');
+    const rawSlice = bytes.subarray(2);
+    const stream = new Blob([rawSlice])
+      .stream()
+      .pipeThrough(new DecompressionStream('deflate-raw'));
+    return new Uint8Array(await new Response(stream).arrayBuffer());
+  }
 }
 
 async function unpredictPng(data, width, height, colors) {
@@ -411,6 +414,7 @@ async function recompressImage(PL, doc, ref, stream, level, preset) {
 
 function dropOrphans(PL, doc) {
   const ctx = doc.context;
+  if (!ctx.trailerInfo.Root) return;
   const seen = new Set();
   const stack = [ctx.trailerInfo.Root];
   if (ctx.trailerInfo.Info) stack.push(ctx.trailerInfo.Info);
@@ -432,6 +436,8 @@ function dropOrphans(PL, doc) {
       stack.push(o.dict);
     }
   }
+
+  if (seen.size === 0) return;
 
   const all = Array.from(ctx.enumerateIndirectObjects());
   for (const [ref] of all) {
@@ -675,7 +681,7 @@ export async function compressPdf(
       needRaster = smartLen > preset.targetBytes;
     } else {
       const savedRatio = 1 - smartLen / original.length;
-      needRaster = savedRatio < (preset.raster.minSaved ?? 0.2);
+      needRaster = savedRatio < (preset.raster.minSaved ?? 0.05);
     }
   }
 
@@ -1018,7 +1024,7 @@ export default function CompressPdfTool() {
           </div>
         </div>
       ) : (
-        /* ACTIVE FILE & RESULTS DASHBOARD (Matches PDF Compression Results Dashboard.png) */
+        /* ACTIVE FILE & RESULTS DASHBOARD */
         <div className="rounded-3xl border border-slate-200/90 bg-slate-50/70 p-2 sm:p-3 shadow-xs">
           <div className="rounded-2xl border border-slate-200/90 bg-white p-5 sm:p-8 space-y-5">
             {/* Top File Row with Red PDF Document Logo */}
@@ -1046,7 +1052,7 @@ export default function CompressPdfTool() {
               </button>
             </div>
 
-            {/* 3 Radio Preset Cards (Matches Screenshot) */}
+            {/* 3 Radio Preset Cards */}
             <div
               role="radiogroup"
               aria-label="Compression level"
@@ -1062,6 +1068,7 @@ export default function CompressPdfTool() {
                     aria-checked={isActive}
                     disabled={isCompressing}
                     onClick={() => {
+                      if (key === preset) return;
                       setPreset(key);
                       if (result) executeCompression(key);
                     }}
@@ -1125,7 +1132,7 @@ export default function CompressPdfTool() {
               </div>
             )}
 
-            {/* Before / After / Saved Telemetry Box (Matches Screenshot) */}
+            {/* Before / After / Saved Telemetry Box */}
             {result && (
               <div className="space-y-3">
                 <div className="rounded-2xl border border-slate-200/90 bg-white px-5 py-4 sm:px-7 sm:py-5">
@@ -1179,14 +1186,16 @@ export default function CompressPdfTool() {
               </div>
             )}
 
-            {/* Next step: make the preset switch obvious instead of hidden */}
+            {/* Next step: context-aware preset suggestion */}
             {result && !result.unchanged && preset !== 'extreme' && (
               <p className="text-center text-xs text-slate-500">
-                Need it smaller? Try Extreme. Want sharper text? Try Low.
+                {preset === 'low'
+                  ? 'Need a smaller file? Try Recommended or Extreme.'
+                  : 'Need it under 200KB? Try Extreme. Want higher print quality? Try Low.'}
               </p>
             )}
 
-            {/* Primary Action Buttons (Matches Screenshot) */}
+            {/* Primary Action Buttons */}
             {result && downloadUrl ? (
               <div className="grid grid-cols-1 sm:grid-cols-12 gap-3 pt-1">
                 <button
